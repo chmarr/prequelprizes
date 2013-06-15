@@ -103,3 +103,7 @@ body.guru p {
 .mumbo {
     color: darkblue;
 }
+
+.strikethrough {
+    text-decoration: line-through;
+}
