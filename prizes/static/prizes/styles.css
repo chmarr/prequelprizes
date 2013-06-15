@@ -22,6 +22,12 @@ body, input, button {
     font-family: "TopazPlus", "Helvetica", sans-serif; font-size: 12pt;
 }
 
+input[type="text"] {
+    border: 2px solid darkblue;
+    border-style: inset;
+}
+
+
 strong, th {
     color: white;
     font-weight: normal;

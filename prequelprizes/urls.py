@@ -20,9 +20,6 @@ urlpatterns = patterns('',
     url(r'^details/', 'prizes.views.enter_details'),
     url(r'^thanks/', 'prizes.views.thanks'),
     url(r'^guru/', 'prizes.views.guru_error'),
-
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': 'static'}),
 )
 
 handler403 = "prizes.views.handler403"
