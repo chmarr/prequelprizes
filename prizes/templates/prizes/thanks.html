@@ -3,8 +3,11 @@
     <title>Thanks!</title>
     <p>Thanks!</p>
     {% if winner %}
-        <p>Again, keep a copy of this key: <strong>{{ winner.key }}</strong>. It's the last you'll see of it.</p>
-        <p>Your authentication has now been blasted away. If you need to re-enter details, you'll need to
-        play the game again.</p>
+        <p>Again, keep a copy of this key: <strong>{{ winner.key }}</strong>. It's the last you'll see of it. I'm
+            erasing my brain and pretending I've never seen you before.</p>
+        <p>If you made a typo in your info and need to correct it, you'll have to win the game again. That is your
+            punishment for typos.</p>
+    {% else %}
+        <p>My brain was erased, so I'm not sure what we're thanking you for. You seem nice, though.</p>
     {% endif %}
 {% endblock %}

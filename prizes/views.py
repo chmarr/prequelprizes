@@ -1,26 +1,38 @@
+from uuid import uuid4
+import hmac
+import hashlib
+import sys
+
 from django import forms
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import QueryDict
 from django.shortcuts import render, redirect, HttpResponse
 from django.utils.timezone import now
-from uuid import uuid4
-import hmac
-import hashlib
-import sys
 from django.conf import settings
+from django.views.decorators.cache import never_cache, cache_control
+
 from models import Winner
 
 
+PRIZES_SECRET_KEY_STR = settings.PRIZES_SECRET_KEY.decode("hex")
+
+
+@never_cache
 def get_key(request):
-    u4 = uuid4()
-    return HttpResponse(u4.hex, mimetype="text/plain")
+    count = Winner.objects.exclude(authentication_time=None).count()
+    if count >= settings.PRIZES_NUM_PRIZES:
+        return HttpResponse("0", mimetype="text/plain")
+    else:
+        u4 = uuid4()
+        return HttpResponse(u4.hex, mimetype="text/plain")
 
 
 class PrizesError(PermissionDenied):
     pass
 
 
+@never_cache
 def check_key(request):
     key = request.REQUEST.get("key")
     sign = request.REQUEST.get("sign")
@@ -30,12 +42,22 @@ def check_key(request):
                           "You're not supposed to visit it directly, you know.")
 
     cc = request.REQUEST.get("cc")
-    h1 = hmac.new(settings.PRIZES_SECRET_KEY, key, hashlib.sha1)
-    if h1.hexdigest() != sign:
-        raise PrizesError("The signature is invalid for the key you supplied. "
+    h1 = hmac.new(PRIZES_SECRET_KEY_STR, key, hashlib.sha1)
+    if len(key) != 32 or h1.hexdigest() != sign:
+        raise PrizesError("I'm pretty sure the game did not generate those numbers. "
                           "Are you up to... shenanigans?")
-    winner, created = Winner.objects.get_or_create(key=key, defaults={'creation_ip': request.META.get("REMOTE_ADDR")})
+
+    try:
+        winner = Winner.objects.get(key=key)
+    except Winner.DoesNotExist:
+        if settings.PRIZES_DISABLED:
+            raise PrizesError("Somehow you managed to get the game to generate a prize link long after "
+                              "all the prizes have been collected. Congratulations on doing that part, "
+                              "but still no prize. Sorry.")
+        winner = Winner(key=key, creation_ip=request.META.get("REMOTE_ADDR"))
+
     winner.authentication_time = now()
+    winner.authentication_ip = request.META.get("REMOTE_ADDR")
     winner.save()
 
     if cc == "yep":
@@ -69,18 +91,19 @@ def get_winner(request):
 class WinnerForm(forms.ModelForm):
     email = forms.EmailField(max_length=80, widget=forms.TextInput(attrs={"size": "40"}))
     name = forms.CharField(max_length=80, widget=forms.TextInput(attrs={"size": "40"}))
-    address1 = forms.CharField(max_length=80, widget=forms.TextInput(attrs={"size": "40"}))
-    address2 = forms.CharField(max_length=80, required=False, widget=forms.TextInput(attrs={"size": "40"}))
+    address1 = forms.CharField(max_length=80, widget=forms.TextInput(attrs={"size": "40"}), label="Address")
+    address2 = forms.CharField(max_length=80, required=False, widget=forms.TextInput(attrs={"size": "40"}), label="")
     city = forms.CharField(max_length=80, widget=forms.TextInput(attrs={"size": "40"}))
     state = forms.CharField(max_length=80, required=False, widget=forms.TextInput(attrs={"size": "40"}))
-    postcode = forms.CharField(max_length=80, widget=forms.TextInput(attrs={"size": "40"}))
+    postcode = forms.CharField(max_length=80, widget=forms.TextInput(attrs={"size": "40"}), label="ZIP/Postcode")
     country = forms.CharField(max_length=80, required=False, widget=forms.TextInput(attrs={"size": "40"}))
 
     class Meta:
         model = Winner
-        fields = []
+        fields = ["email", "name", "address1", "address2", "city", "state", "postcode", "country"]
 
 
+@cache_control(private=True)
 def enter_details(request):
     winner = get_winner(request)
     if request.method == "POST":
@@ -88,6 +111,7 @@ def enter_details(request):
         if form.is_valid():
             winner = form.save(commit=False)
             winner.details_time = now()
+            winner.details_ip = request.META.get("REMOTE_ADDR")
             winner.save()
             return redirect(thanks)
     else:
@@ -96,6 +120,7 @@ def enter_details(request):
     return render(request, "prizes/enter_details.html", {"form": form, "winner": winner})
 
 
+@cache_control(private=True)
 def thanks(request):
     try:
         winner = get_winner(request)

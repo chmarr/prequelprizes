@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.views.generic import TemplateView
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -15,11 +17,12 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^getkey/', 'prizes.views.get_key'),
-    url(r'^checkkey/', 'prizes.views.check_key'),
-    url(r'^details/', 'prizes.views.enter_details'),
-    url(r'^thanks/', 'prizes.views.thanks'),
-    url(r'^guru/', 'prizes.views.guru_error'),
+    url(r'^getkey/$', 'prizes.views.get_key'),
+    url(r'^checkkey/$', 'prizes.views.check_key'),
+    url(r'^details/$', 'prizes.views.enter_details'),
+    url(r'^thanks/$', 'prizes.views.thanks'),
+    url(r'^guru/$', 'prizes.views.guru_error'),
+    url(r'^guru/samples/$', TemplateView.as_view(template_name="prizes/samples.html")),
 )
 
 handler403 = "prizes.views.handler403"

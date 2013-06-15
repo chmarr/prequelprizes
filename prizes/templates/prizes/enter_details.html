@@ -1,13 +1,24 @@
 {% extends "prizes/base.html" %}
 {% block content %}
     <title>Please share your most intimate details</title>
-<p>If something goes horribly wrong, you'll need this key: <strong>{{ winner.key }}</strong></p>
-{{ form.non_field_errors }}
-<form method="post">{% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <br/>
-    <input type="submit" value="Accept my most personal details"/>
-</form>
+    <p>The <i>Powers That Be</i> have decided that you have won a prize! Please enter sufficent and accurate information
+        about
+        you that we may deliver the prize to you using <strike>the most expedient method</strike> USPS.</p>
+    <p>Also, if something goes horribly wrong, you'll need this letterbarf: <strong>{{ winner.key }}</strong>. Please
+        purchase
+        sufficient magnetized letters to record it on your icebox.</p>
+    <hr/>
+    {{ form.non_field_errors }}
+    <form method="post">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <br/>
+        <input type="submit" value="Accept my most personal details"/>
+    </form>
+    <hr/>
+    <p class="mumbo">We will only store and use this information for the purpose of delivering your prize. There may be an
+        intermediate stage were we laugh at your surname or deride your place of residence, but we promise to do that
+        privately and only for a short time. After all complainants are squashed and prizes are delivered, we will delete
+        this information, or at least sort the 0s and 1s into different buckets for later re-use.</p>
 {% endblock %}

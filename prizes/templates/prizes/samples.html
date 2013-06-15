@@ -1,0 +1,8 @@
+{% extends "prizes/base.html" %}
+{% load url from future %}
+{% block content %}
+<p>Here are some samples</p>
+<p><a href="{% url "prizes.views.check_key" %}?key=f8a852d1de0f4823a3b9130c7dbc0bf9&sign=1bf5576d23999e4867ddd300f58b2d12aabfca5e">Sample 1</a></p>
+<p><a href="{% url "prizes.views.check_key" %}?key=908541279f6b4b0ebe273a75d5d20591&sign=6f987b4bf99424db6c99108938c53fceb6dac5fb">Sample 2</a></p>
+<p><a href="{% url "prizes.views.check_key" %}?key=c7db43f10756442a8644e0b8ed9bb4a8&sign=8825f576cf8f71e07594008850260f023659c6c8">Sample 3</a></p>
+{% endblock %}

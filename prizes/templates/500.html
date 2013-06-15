@@ -10,16 +10,17 @@
 
         <p>Something went horribly wrong. I'm supposed to say something like "not your fault", but it probably was.</p>
 
-        <p>Have some soothing debugging numbers: 0f300000.15f00091</p>
+        <p>Have some soothing debugging numbers: <span
+                title="I don't know what these mean, either.">0f300000.15f00091</span></p>
     </div>
 </div>
 <script> <!--
-function blinkborder () {
+function blinkborder() {
     var guru2 = document.getElementById("guru2");
-    guru2.style.borderColor = (guru2.style.borderColor=="white")?"red":"white";
-    setTimeout(blinkborder,500);
+    guru2.style.borderColor = (guru2.style.borderColor == "white") ? "red" : "white";
+    setTimeout(blinkborder, 500);
 }
-setTimeout(blinkborder,500);
+setTimeout(blinkborder, 500);
 --> </script>
 </body>
 </html>
