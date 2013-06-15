@@ -1,0 +1,13 @@
+{% extends "prizes/base.html" %}
+{% load url from future %}
+{% block content %}
+<title>No Cookies!</title>
+<p>Okay, this might be some kind of shock to you, but this prize-giving thing won't work unless
+cookies are enabled.<p>
+<p>Listen.</p>
+<p>Various governments are already tracking everything you do; cookies are the
+least of your concerns. Please enable cookies &mdash;
+or at least select "Block cookies from third parties and advertisers" &mdash;
+and then click the following link:</p>
+<p><a href="{% url "prizes.views.check_key" %}?key={{ key }}&sign={{ sign }}">The Following Link!</a></p>
+{% endblock %}

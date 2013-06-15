@@ -1,0 +1,8 @@
+{% extends "prizes/base.html" %}
+{% block content %}
+    <h1>Page Not found</h1>
+    <p>What you were looking for is not where you think it is... please try searching AltaVista.</p>
+    {% if exc_message %}
+        <p>{{ exc_message }}</p>
+    {% endif %}
+{% endblock %}

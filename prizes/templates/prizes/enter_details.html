@@ -1,0 +1,13 @@
+{% extends "prizes/base.html" %}
+{% block content %}
+    <title>Please share your most intimate details</title>
+<p>If something goes horribly wrong, you'll need this key: <strong>{{ winner.key }}</strong></p>
+{{ form.non_field_errors }}
+<form method="post">{% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <br/>
+    <input type="submit" value="Accept my most personal details"/>
+</form>
+{% endblock %}

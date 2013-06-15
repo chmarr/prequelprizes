@@ -1,0 +1,96 @@
+/* IE6/7/8 */
+@font-face {
+           font-family:TopazPlus;
+           src: url(/static/prizes/TopazPlus_a500_v1.0.eot);
+}
+
+/* FF3.5+/Safari/Opera10 */
+@font-face {
+           font-family:TopazPlus;
+           src: url(/static/prizes/TopazPlus_a500_v1.0.ttf) format("truetype");
+}
+
+body {
+    margin: 10px;
+    border: 2px solid darkblue;
+    padding: 10px;
+}
+
+body, input, button {
+    background-color: black;
+    color: lightyellow;
+    font-family: "TopazPlus", "Helvetica", sans-serif; font-size: 12pt;
+}
+
+strong, th {
+    color: white;
+    font-weight: normal;
+}
+
+.errornote {
+    font-size: 16px !important;
+    display: block;
+    padding: 4px 5px 4px 25px;
+    margin: 0 0 3px 0;
+    border: 1px solid red;
+    color: red;
+    background: #ffc url(../img/icon_error.gif) 5px .3em no-repeat;
+}
+
+ul.errorlist {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.errorlist li {
+    font-size: 16px !important;
+    display: block;
+    padding: 4px 5px 4px 25px;
+    margin: 0 0 3px 0;
+    border: 1px solid red;
+    color: white;
+    background: red url(../img/icon_alert.gif) 5px .3em no-repeat;
+}
+
+.errorlist li a {
+ 	color: white;
+    text-decoration: underline;
+}
+
+td ul.errorlist {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+td ul.errorlist li {
+    margin: 0 !important;
+}
+
+.errors {
+    background: #ffc;
+}
+
+.errors input, .errors select, .errors textarea {
+    border: 1px solid red;
+}
+
+body.guru {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#guru1 {
+    background-color: red;
+    padding: 10px;
+}
+
+#guru2 {
+    border: 2px solid white;
+    margin 10px;
+    padding 10px;
+}
+body.guru p {
+    text-align: center;
+    color: white;
+}
