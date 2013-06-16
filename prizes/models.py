@@ -16,6 +16,7 @@ class Winner(models.Model):
     state = models.CharField(max_length=80, blank=True)
     postcode = models.CharField(max_length=80, blank=True)
     country = models.CharField(max_length=80, blank=True)
+    game_time = models.FloatField(blank=True, null=True)
 
     def __unicode__(self):
         return "%s... (%s, %s)" % ( self.key[:8], self.name, self.email )
