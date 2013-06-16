@@ -35,14 +35,15 @@ class PrizesError(PermissionDenied):
 @never_cache
 def check_key(request):
     key = request.REQUEST.get("key")
+    time = request.REQUEST.get("time")
     sign = request.REQUEST.get("sign")
 
-    if key is None or sign is None:
+    if key is None or sign is None or time is None:
         raise PrizesError("There seems to be a bunch of information missing from that URL. "
                           "You're not supposed to visit it directly, you know.")
 
     cc = request.REQUEST.get("cc")
-    h1 = hmac.new(PRIZES_SECRET_KEY_STR, key, hashlib.sha1)
+    h1 = hmac.new(PRIZES_SECRET_KEY_STR, key + time, hashlib.sha1)
     if len(key) != 32 or h1.hexdigest() != sign:
         raise PrizesError("I'm pretty sure the game did not generate those numbers. "
                           "Are you up to... shenanigans?")
