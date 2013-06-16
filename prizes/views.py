@@ -49,6 +49,11 @@ def check_key(request):
                           "Are you up to... shenanigans?")
 
     try:
+        game_time = float(time)
+    except ValueError:
+        raise PrizesError("That doesn't look like a valid game time. I think we messed up here.")
+
+    try:
         winner = Winner.objects.get(key=key)
     except Winner.DoesNotExist:
         if settings.PRIZES_DISABLED:
@@ -59,6 +64,7 @@ def check_key(request):
 
     winner.authentication_time = now()
     winner.authentication_ip = request.META.get("REMOTE_ADDR")
+    winner.game_time = game_time
     winner.save()
 
     if cc == "yep":
