@@ -71,7 +71,7 @@ def check_key(request):
     else:
         request.session.set_test_cookie()
         qd = QueryDict('', mutable=True)
-        qd.update({"key": key, "sign": sign, "cc": "yep"})
+        qd.update({"key": key, "time": time, "sign": sign, "cc": "yep"})
         return redirect(reverse(check_key) + "?" + qd.urlencode())
 
 
