@@ -1,11 +1,29 @@
 {% extends "prizes/base.html" %}
+{% load static %}
 {% block content %}
+    <script src="{% static "admin/js/jquery.js" %}"></script>
+    <script> <!--
+    jQuery(function ($) {
+        $("form").submit(function () {
+            var body = $("body");
+            var y = 0;
+            body.css("background-image", "url({% static 'prizes/rainbowbackground.png' %})");
+            function step() {
+                y -= 2;
+                body.css("background-position", "0px " + y + "px");
+                setTimeout(step, 20);
+            }
+
+            setTimeout(step, 20);
+        });
+    });
+    --> </script>
     <title>Please share your most personal details</title>
     <p>The Powers That Be have decided that you have won a prize! Please enter sufficent and accurate information
-        about
-        you that we may deliver the prize to you using <span class="strikethrough">the most expedient method</span> USPS.</p>
-    <p>Also, if something goes horribly wrong, you'll need this Secret Winner Code(TM): <strong>{{ winner.key }}</strong>. Please
-        purchase
+        about you that we may deliver the prize to you using
+        <span class="strikethrough">the most expedient method</span> USPS.</p>
+    <p>Also, if something goes horribly wrong, you'll need this Secret Winner Code(TM):
+        <strong>{{ winner.key }}</strong>. Please purchase
         sufficient magnetized letters to record it on your icebox.</p>
     <hr/>
     {{ form.non_field_errors }}
@@ -17,8 +35,8 @@
         <input type="submit" value="Accept my most personal details"/>
     </form>
     <hr/>
-    <p class="mumbo">We will only store and use this information for the purpose of delivering your prize. There may be an
-        intermediate stage were we laugh at your surname or deride your place of residence, but we promise to do that
-        privately and only for a short time. After all complainants are squashed and prizes are delivered, we will delete
-        this information, or at least sort the 0s and 1s into different buckets for later re-use.</p>
+    <p class="mumbo">We will only store and use this information for the purpose of delivering your prize. There may be
+        an intermediate stage were we laugh at your surname or deride your place of residence, but we promise to do that
+        privately and only for a short time. After all complainants are squashed and prizes are delivered, we will
+        delete this information, or at least sort the 0s and 1s into different buckets for later re-use.</p>
 {% endblock %}

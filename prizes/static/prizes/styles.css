@@ -14,9 +14,12 @@ body {
     margin: 10px;
     border: 2px solid darkblue;
     padding: 10px;
+    background-color: black;
+    color: lightyellow;
+    font-family: "TopazPlus", "Helvetica", sans-serif; font-size: 12pt;
 }
 
-body, input, button {
+input, button {
     background-color: black;
     color: lightyellow;
     font-family: "TopazPlus", "Helvetica", sans-serif; font-size: 12pt;
