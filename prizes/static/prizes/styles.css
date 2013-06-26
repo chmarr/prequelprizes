@@ -17,6 +17,7 @@ body {
     background-color: black;
     color: lightyellow;
     font-family: "TopazPlus", "Helvetica", sans-serif; font-size: 12pt;
+    min-width: 848px;
 }
 
 input, button {
@@ -26,10 +27,8 @@ input, button {
 }
 
 input[type="text"] {
-    border: 2px solid darkblue;
-    border-style: inset;
+    border: 2px inset darkblue;
 }
-
 
 strong, th {
     color: white;
@@ -96,8 +95,8 @@ body.guru {
 
 #guru2 {
     border: 2px solid white;
-    margin 10px;
-    padding 10px;
+    margin: 10px;
+    padding: 10px;
 }
 body.guru p {
     text-align: center;
