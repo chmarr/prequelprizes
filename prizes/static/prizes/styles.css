@@ -109,3 +109,7 @@ body.guru p {
 .strikethrough {
     text-decoration: line-through;
 }
+
+#detailsimg {
+    float: right;
+}
