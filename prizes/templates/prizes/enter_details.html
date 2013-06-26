@@ -28,9 +28,6 @@
     <hr/>
     <table>
         <tr>
-            <td style="vertical-align: top">
-                <img id="#detailsimg" src="{% static "prizes/Prizeimage.gif" %}" />
-            </td>
             <td>
                 {{ form.non_field_errors }}
                 <form method="post">{% csrf_token %}
@@ -43,6 +40,9 @@
                         </td></tr>
                     </table>
                 </form>
+            </td>
+            <td style="vertical-align: top">
+                <img id="#detailsimg" src="{% static "prizes/Prizeimage.gif" %}" />
             </td>
         </tr>
     </table>
