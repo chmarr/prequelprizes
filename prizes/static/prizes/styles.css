@@ -17,7 +17,6 @@ body {
     background-color: black;
     color: lightyellow;
     font-family: "TopazPlus", "Helvetica", sans-serif; font-size: 12pt;
-    min-width: 848px;
 }
 
 input, button {
@@ -112,4 +111,13 @@ body.guru p {
 
 #detailsimg {
     float: right;
+}
+
+img.messageimg {
+    float: left;
+    margin: 0 10px 10px 0;
+}
+
+div.clear {
+    clear: both;
 }

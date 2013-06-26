@@ -73,7 +73,7 @@ def check_key(request):
             request.session.delete_test_cookie()
             return redirect(enter_details)
         else:
-            return render(request, "prizes/no_cookies.html", {"key": key, "sign": sign})
+            return render(request, "prizes/no_cookies.html", {"key": key, "time": time, "sign": sign})
     else:
         request.session.set_test_cookie()
         qd = QueryDict('', mutable=True)

@@ -1,6 +1,7 @@
 {% extends "prizes/base.html" %}
 {% load static %}
 {% block content %}
+    <style>body { min-width: 848px; }</style>
     <script src="{% static "admin/js/jquery.js" %}"></script>
     <script> <!--
     jQuery(function ($) {
@@ -42,7 +43,7 @@
     </form>
     <hr/>
     <p class="mumbo">We will only store and use this information for the purpose of delivering your prize. There may be
-        an intermediate stage were we laugh at your surname or deride your place of residence, but we promise to do that
+        an intermediate stage where we laugh at your surname or deride your place of residence, but we promise to do that
         privately and only for a short time. After all complainants are squashed and prizes are delivered, we will
         delete this information, or at least sort the 0s and 1s into different buckets for later re-use.</p>
 {% endblock %}

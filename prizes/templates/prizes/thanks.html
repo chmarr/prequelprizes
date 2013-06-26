@@ -1,6 +1,8 @@
 {% extends "prizes/base.html" %}
+{% load static %}
 {% block content %}
     <title>Thanks!</title>
+    <img class="messageimg" src="{% static "prizes/Thanks.gif" %}"/>
     <p>Thanks!</p>
     {% if winner %}
         <p>Again, keep a copy of this key: <strong>{{ winner.key }}</strong>. It's the last you'll see of it. I'm
@@ -10,4 +12,5 @@
     {% else %}
         <p>My brain was erased, so I'm not sure what we're thanking you for. You seem nice, though.</p>
     {% endif %}
+    <div class="clear"></div>
 {% endblock %}
