@@ -20,3 +20,11 @@ class Winner(models.Model):
 
     def __unicode__(self):
         return "%s... (%s, %s)" % ( self.key[:8], self.name, self.email )
+
+
+class Setting(models.Model):
+    key = models.CharField(max_length=80, unique=True)
+    value = models.CharField(max_length=1024, blank=True)
+
+    def __unicode__(self):
+        return self.key

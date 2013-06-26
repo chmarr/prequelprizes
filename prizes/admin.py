@@ -6,3 +6,10 @@ class WinnerAdmin(ModelAdmin):
     search_fields = ["key","name","email","authentication_ip","details_ip"]
 
 site.register(Winner,WinnerAdmin)
+
+
+class SettingAdmin(ModelAdmin):
+    list_display = ["key","value"]
+    list_editable = ["value"]
+
+site.register(Setting,SettingAdmin)
