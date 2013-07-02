@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^:3_admin/', include(admin.site.urls)),
 
+    url(r'^$', TemplateView.as_view(template_name="prizes/home.html"), name='home'),
     url(r'^getkey/$', 'prizes.views.get_key'),
     url(r'^checkkey/$', 'prizes.views.check_key'),
     url(r'^details/$', 'prizes.views.enter_details'),
