@@ -105,6 +105,13 @@ body.guru p {
     color: darkblue;
 }
 
+.wopr {
+    color: darkorange;
+}
+p.wopr {
+    margin-top: 30px;
+}
+
 .strikethrough {
     text-decoration: line-through;
 }
