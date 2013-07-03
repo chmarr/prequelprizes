@@ -8,7 +8,7 @@ jQuery(function(){
     jQuery("#blah").children().hide();
     jQuery("#line1").typewriter({framerate:200, group: /(\.|\?|[\w'/]*)[^.?\w]*/g}).queue(animline2);
     function animline2(){
-        jQuery("#line2").typewriter({framerate:80}).queue(animline3);
+        jQuery("#line2").typewriter({framerate:80}).delay(1000).queue(animline3);
     }
     function animline3(){
         jQuery("#line3").typewriter({framerate:200, group: /(\.|\?|[\w']*)[^.?\w]*/g}).queue(animline4);
