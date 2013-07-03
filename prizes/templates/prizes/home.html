@@ -1,67 +1,9 @@
 {% extends "prizes/base.html" %}
+{% load static %}
 {% block content %}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" ></script>
+<script src="{% static "prizes/typewriter.js" %}" ></script>
 <script> <!--
-
-(function($, name) {
-/* jQuery typewriter plugin
-    2012-11-15
-    https://github.com/bergus */
-    $[name+"Defaults"] = {
-        framerate: 1000/60,
-        group: /.{0,2}/g // 2: Number of chars per frame
-    };
-    $.fn[name] = function(options, callback) {
-        if (typeof options != 'object') callback=options, options={};
-
-        return this.each(function() {
-            var el = $(this),
-                conf = $.extend({}, $[name+"Defaults"], options);
-            el.queue("fx", function(next) {
-                animateNode(this, conf, typeof callback == 'function'
-                  ? function() { callback.call(el[0]); next(); }
-                  : next
-                );
-                el.show();
-            });
-        });
-    };
-    function chunk(text, conf) {
-        // splitting the text into parts (http://stackoverflow.com/a/11657799/1048572)
-        return text.match(conf.group);
-    }
-    function timeout(callback, conf) {
-        // set up the timeout
-        // want to randomize? Have a look at http://jsfiddle.net/pZb8W/2/ for possible implementation
-        setTimeout(callback, conf.framerate);
-    }
-    function animateNode(element, conf, callback) {
-        var pieces = [];
-        if (element.nodeType==1 && element.hasChildNodes()) {
-            while (element.hasChildNodes())
-                pieces.push(element.removeChild(element.firstChild));
-            timeout(function childStep() {
-                if (pieces.length) {
-                    var piece = pieces.shift();
-                    animateNode(piece, conf, childStep);
-                    element.appendChild(piece);
-                } else
-                    callback();
-            }, conf);
-        } else if (element.nodeType==3) {
-            pieces = chunk(element.data, conf);
-            element.data = "";
-            (function addText(){
-                element.data += pieces.shift();
-                timeout(pieces.length ? addText : callback, conf);
-            })();
-        } else // empty or special (comment etc) node
-            timeout(callback, conf);
-    }
-
-})(jQuery, "typewriter");
-
-
 jQuery(function(){
     jQuery("#blah").children().hide();
     jQuery("#line1").typewriter({framerate:200, group: /(\.|\?|[\w'/]*)[^.?\w]*/g}).queue(animline2);
@@ -75,14 +17,11 @@ jQuery(function(){
         jQuery("#line4").typewriter({framerate:80});
     }
 });
-
 --> </script>
-
 <div id="blah">
     <p class="wopr" id="line1">IT'S BEEN A LONG TIME. CAN YOU EXPLAIN THE REMOVAL OF YOUR USER ACCOUNT NUMBER ON 6/23/73?</p>
     <p id="line2">People sometimes make mistak</p>
     <p class="wopr" id="line3">YES THEY DO. SHALL WE PLAY A GAME?</p>
     <p id="line4">Love to. How about <a href="http://prequeladventure.com/this/KatiaTakeControl.html">...</a></p>
 </div>
-
 {% endblock %}
