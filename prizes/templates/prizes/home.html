@@ -5,23 +5,33 @@
 <script src="{% static "prizes/typewriter.js" %}" ></script>
 <script> <!--
 jQuery(function(){
-    jQuery("#blah").children().hide();
-    jQuery("#line1").typewriter({framerate:200, group: /(\.|\?|[\w'/]*)[^.?\w]*/g}).queue(animline2);
+    var cursor = jQuery("#cursor");
+    jQuery(".tty>span").hide();
+    jQuery("#line1").append(cursor).find("span:first").typewriter({framerate:200, group: /(\.|\?|[\w'/]*)[^.?\w]*/g}).queue(animline2);
     function animline2(){
-        jQuery("#line2").typewriter({framerate:80}).delay(1000).queue(animline3);
+        jQuery("#line2").append(cursor).find("span:first").typewriter({framerate:80}).delay(1000).queue(animline3);
     }
     function animline3(){
-        jQuery("#line3").typewriter({framerate:200, group: /(\.|\?|[\w']*)[^.?\w]*/g}).queue(animline4);
+        jQuery("#line3").append(cursor).find("span:first").typewriter({framerate:200, group: /(\.|\?|[\w']*)[^.?\w]*/g}).queue(animline4);
     }
     function animline4(){
-        jQuery("#line4").typewriter({framerate:80});
+        jQuery("#line4").append(cursor).find("span:first").typewriter({framerate:80});
     }
+});
+jQuery(function(){
+    function blinky(){
+        var cursor = document.getElementById("cursor");
+        cursor.style.color = (cursor.style.color == "") ? "black" : "";
+        setTimeout(blinky, 250);
+    }
+    setTimeout(blinky, 250);
 });
 --> </script>
 <div id="blah">
-    <p class="wopr" id="line1">IT'S BEEN A LONG TIME. CAN YOU EXPLAIN THE REMOVAL OF YOUR USER ACCOUNT NUMBER ON 6/23/73?</p>
-    <p id="line2">People sometimes make mistak</p>
-    <p class="wopr" id="line3">YES THEY DO. SHALL WE PLAY A GAME?</p>
-    <p id="line4">Love to. How about <a href="http://prequeladventure.com/this/KatiaTakeControl.html">...</a></p>
+    <span id="cursor">_</span>
+    <p class="tty wopr" id="line1"><span>IT'S BEEN A LONG TIME. CAN YOU EXPLAIN THE REMOVAL OF YOUR USER ACCOUNT NUMBER ON 6/23/73?</span></p>
+    <p class="tty" id="line2"><span>People sometimes make mistak</span></p>
+    <p class="tty wopr" id="line3"><span>YES THEY DO. SHALL WE PLAY A GAME?</span></p>
+    <p class="tty" id="line4"><span>Love to. How about <a href="http://prequeladventure.com/this/KatiaTakeControl.html">...</a></span></p>
 </div>
 {% endblock %}
