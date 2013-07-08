@@ -20,7 +20,7 @@ PRIZES_SECRET_KEY_STR = settings.PRIZES_SECRET_KEY.decode("hex")
 
 @never_cache
 def get_key(request):
-    count = Winner.objects.exclude(authentication_time=None).count()
+    count = Winner.objects.exclude(details_time=None).count()
     if count >= settings.PRIZES_NUM_PRIZES:
         return HttpResponse("0", mimetype="text/plain")
     else:
