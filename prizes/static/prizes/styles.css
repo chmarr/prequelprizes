@@ -128,3 +128,14 @@ img.messageimg {
 div.clear {
     clear: both;
 }
+
+div.kittyroll {
+    width: 1px;
+    height: 1px;
+    max-width: 1px;
+    max-height: 1px;
+    display: inline-block;
+    overflow: visible;
+    vertical-align: top;
+    margin-left: 5px;
+}

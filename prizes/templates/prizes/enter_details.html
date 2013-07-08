@@ -17,6 +17,13 @@
 
             setTimeout(step, 20);
         });
+        $("input[type=\"text\"]")
+                .focus(function(){
+                    $(this).after("<div class=\"kittyroll\"><img src=\"{% static "prizes/Kittyroll.gif" %}\" /></div>" );
+                })
+                .blur(function(){
+                    $(this).next().detach();
+                });
     });
     --> </script>
     <title>Please share your most personal details</title>
