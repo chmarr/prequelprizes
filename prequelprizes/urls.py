@@ -26,6 +26,8 @@ urlpatterns = patterns('',
     url(r'^checkkey/$', 'prizes.views.check_key'),
     url(r'^details/$', 'prizes.views.enter_details'),
     url(r'^thanks/$', 'prizes.views.thanks'),
+
+    url(r'^csvdump/$', 'prizes.views.csv_dump'),
 )
 
 handler403 = "prizes.views.handler403"

@@ -6,6 +6,7 @@ import hashlib
 import sys
 
 from django import forms
+from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import QueryDict
@@ -143,3 +144,18 @@ def handler403(request):
     exc_value = sys.exc_info()[1]
     exc_message = str(exc_value)
     return render(request, "403.html", {"exc_message": exc_message})
+
+
+@permission_required('prizes.change_winner')
+def csv_dump(request):
+    import csv
+    response = HttpResponse(mimetype="application/csv" )
+    response['Content-Disposition'] = 'attachment; filename="winners.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(('email', 'name', 'address1', 'address2', 'city', 'state', 'postcode', 'country'))
+
+    for w in Winner.objects.exclude(details_time=None):
+        writer.writerow((w.email, w.name, w.address1, w.address2, w.city, w.state, w.postcode, w.country))
+
+    return response
