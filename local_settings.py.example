@@ -3,6 +3,8 @@ from prequelprizes.common_settings import *
 DEBUG=True
 TEMPLATE_DEBUG=True
 
+SECRET_KEY = "generate a random secret key here"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.',
