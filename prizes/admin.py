@@ -1,3 +1,5 @@
+# PrequelPrizes server-side code Copyright (c) 2013 Chris Cogdon - chris@cogdon.org
+
 from django.contrib.admin import site, ModelAdmin
 from models import *
 

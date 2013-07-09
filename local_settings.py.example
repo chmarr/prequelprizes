@@ -1,0 +1,21 @@
+from prequelprizes.common_settings import *
+
+DEBUG=True
+TEMPLATE_DEBUG=True
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+
+ADMIN_URL = '/admin/'
+
+PRIZES_SECRET_KEY = "shared key between game and server"
+PRIZES_NUM_PRIZES = 200
+PRIZES_DISABLED = False

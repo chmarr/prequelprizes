@@ -1,3 +1,5 @@
+# PrequelPrizes server-side code Copyright (c) 2013 Chris Cogdon - chris@cogdon.org
+
 from uuid import uuid4
 import hmac
 import hashlib
@@ -141,7 +143,3 @@ def handler403(request):
     exc_value = sys.exc_info()[1]
     exc_message = str(exc_value)
     return render(request, "403.html", {"exc_message": exc_message})
-
-
-def guru_error(request):
-    raise Exception("Testing Guru Error")

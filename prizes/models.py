@@ -1,3 +1,5 @@
+# PrequelPrizes server-side code Copyright (c) 2013 Chris Cogdon - chris@cogdon.org
+
 from django.db import models
 
 class Winner(models.Model):
