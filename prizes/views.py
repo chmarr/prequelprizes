@@ -1,7 +1,7 @@
 # PrequelPrizes server-side code Copyright (c) 2013 Chris Cogdon - chris@cogdon.org
+
 import codecs
 import csv
-
 from uuid import uuid4
 import hmac
 import hashlib
@@ -172,7 +172,7 @@ class UnicodeCSVWriter:
         # write to the target stream
         self.stream.write(data)
         # empty queue
-        self.queue.truncate()
+        self.queue.truncate(0)
 
     def writerows(self, rows):
         for row in rows:
@@ -181,13 +181,13 @@ class UnicodeCSVWriter:
 
 @permission_required('prizes.change_winner')
 def csv_dump(request):
-    response = HttpResponse(mimetype="application/csv" )
+    response = HttpResponse(mimetype="text/csv")
     response['Content-Disposition'] = 'attachment; filename="winners.csv"'
 
-    writer = UnicodeCSVWriter(response)
-    writer.writerow(('email', 'name', 'address1', 'address2', 'city', 'state', 'postcode', 'country'))
+    outp = UnicodeCSVWriter(response)
+    outp.writerow(('email', 'name', 'address1', 'address2', 'city', 'state', 'postcode', 'country'))
 
     for w in Winner.objects.exclude(details_time=None):
-        writer.writerow((w.email, w.name, w.address1, w.address2, w.city, w.state, w.postcode, w.country))
+        outp.writerow((w.email, w.name, w.address1, w.address2, w.city, w.state, w.postcode, w.country))
 
     return response
