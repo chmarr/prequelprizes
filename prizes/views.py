@@ -1,9 +1,12 @@
 # PrequelPrizes server-side code Copyright (c) 2013 Chris Cogdon - chris@cogdon.org
+import codecs
+import csv
 
 from uuid import uuid4
 import hmac
 import hashlib
 import sys
+import cStringIO
 
 from django import forms
 from django.contrib.auth.decorators import permission_required
@@ -146,13 +149,42 @@ def handler403(request):
     return render(request, "403.html", {"exc_message": exc_message})
 
 
+class UnicodeCSVWriter:
+    """
+    A CSV writer which will write rows to CSV file "f",
+    which is encoded in the given encoding.
+    """
+
+    def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
+        # Redirect output to a queue
+        self.queue = cStringIO.StringIO()
+        self.writer = csv.writer(self.queue, dialect=dialect, **kwds)
+        self.stream = f
+        self.encoder = codecs.getincrementalencoder(encoding)()
+
+    def writerow(self, row):
+        self.writer.writerow([unicode(s).encode("utf-8") for s in row])
+        # Fetch UTF-8 output from the queue ...
+        data = self.queue.getvalue()
+        data = data.decode("utf-8")
+        # ... and reencode it into the target encoding
+        data = self.encoder.encode(data)
+        # write to the target stream
+        self.stream.write(data)
+        # empty queue
+        self.queue.truncate()
+
+    def writerows(self, rows):
+        for row in rows:
+            self.writerow(row)
+
+
 @permission_required('prizes.change_winner')
 def csv_dump(request):
-    import csv
     response = HttpResponse(mimetype="application/csv" )
     response['Content-Disposition'] = 'attachment; filename="winners.csv"'
 
-    writer = csv.writer(response)
+    writer = UnicodeCSVWriter(response)
     writer.writerow(('email', 'name', 'address1', 'address2', 'city', 'state', 'postcode', 'country'))
 
     for w in Winner.objects.exclude(details_time=None):
