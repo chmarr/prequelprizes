@@ -22,10 +22,10 @@ urlpatterns = patterns('',
     url(r'^' + re.escape(settings.ADMIN_URL[1:]), include(admin.site.urls)),
 
     url(r'^$', TemplateView.as_view(template_name="prizes/home.html"), name='home'),
-    url(r'^getkey/$', 'prizes.views.get_key'),
-    url(r'^checkkey/$', 'prizes.views.check_key'),
-    url(r'^details/$', 'prizes.views.enter_details'),
-    url(r'^thanks/$', 'prizes.views.thanks'),
+    url(r'^game2/getkey/$', 'prizes.views.get_key'),
+    url(r'^game2/checkkey/$', 'prizes.views.check_key'),
+    url(r'^game2/details/$', 'prizes.views.enter_details'),
+    url(r'^game2/thanks/$', 'prizes.views.thanks'),
 
     url(r'^csvdump/$', 'prizes.views.csv_dump'),
 )
